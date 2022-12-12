@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #b7d9d3;
+}
+
+.t_central {
+    height: 100%;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -5,7 +5,7 @@ export default function(text, onClick) {
 
     this.getHTML= function() {
         return `
-        <button>${text}</button>`
+        <button type="button"  class="btn btn-primary">${text}</button>`
     }
 
     this.bindScript= function() {

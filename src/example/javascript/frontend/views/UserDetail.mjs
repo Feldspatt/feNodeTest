@@ -16,6 +16,8 @@ export function UserDetail(routeParams) {
 
     this.user = users.find(user => user.name === this.username)
 
+    this.title = this.username
+
     this.greetings = new Button(`Hello ${this.user.name}, happy ${this.user.age}th birthday!`)
 
     this.template = new Central(this.greetings)

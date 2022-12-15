@@ -1,9 +1,9 @@
 import {Bag, Item, User} from "./types.mjs";
 
 export const users = [
-    new User("jane", 21),
-    new User("john", 20),
-    new User("jack", 22),
+    new User("jane", 21, "soccer"),
+    new User("john", 20, "tennis"),
+    new User("jack", 22, "basketball"),
 ]
 
 

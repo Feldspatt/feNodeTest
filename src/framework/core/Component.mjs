@@ -7,7 +7,6 @@ export function Component(){
      */
     this.element= null
 
-
     /**
      * Make sure the returned string have only one component at the top level
      * @returns <string>
@@ -38,13 +37,7 @@ export function Component(){
         console.log("getting element")
 
         if(!this.element) {
-
-            console.log("element is null, creating one")
-
             this.element = stringToHTMLElement(this.getHTML())
-
-            console.log("created element: " + this.element.innerHTML)
-
             this.bindScript()
         }
 

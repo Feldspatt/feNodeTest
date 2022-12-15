@@ -1,6 +1,7 @@
-export function User(name, age){
+export function User(name, age, sport){
     this.name = name
     this.age = age
+    this.sport = sport
 }
 
 export function Bag(name, owner, items = []){

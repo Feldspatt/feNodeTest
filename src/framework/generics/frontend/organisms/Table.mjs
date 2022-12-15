@@ -1,57 +1,48 @@
 import {Component} from "../../../core/Component.mjs";
-import {slot} from "../../../core/helpers.mjs";
-import {TableHeaders} from "../molecules/TableHeaders.mjs";
 
-export function Table(headers, rows, clickHandler){
+export function Table(headersString = [], rowsString = [], clickHandler = () => {
+}, data = null) {
     Component.call(this)
 
-    this.headers = headers
-    this.rows = rows
+
+    this.headers = headersString
+    this.rows = rowsString
     this.clickHandler = clickHandler
+    this.data = data
+
+
+    this.createHeaders = function(headers){
+        return headers.map(header=> `<td>${header}</td>`)
+    }
+
+    this.createRows = function(rows){
+        return rows.map((row, i) => {
+            if(row.length > headersString.length) throw new Error("Row has more columns than headers.")
+            else if(row.length < headersString.length) throw new Error("Row has less columns than headers.")
+
+            return `<tr>${row.map(cell=> `<td>${cell}</td>`).join("")}</tr>`
+        })
+    }
 
 
     this.getHTML = function() {
 
-        let rows = ""
-        for(let i in this.rows){
-            rows += slot("row" + i)
-        }
-
         return `
         <table class="table">
             <thead>
-                ${slot("he", true)}
+                <tr>
+                 ${this.createHeaders(this.headers)}
+                </tr>
             </thead>
             <tbody>
-                ${rows}
+                ${this.createRows(this.rows)}
             </tbody>
         </table>
         `
     }
 
     this.bindScript = function() {
-
-        // let p = new Paragraph("Hello World").getElement()
-
-        let headers = new TableHeaders(["Name", "Age"])
-
-        // console.log("row: " + headers.getElement().innerHTML)
-        this.fillSlot("he", headers.getElement())
-
-        console.log("filling rows...")
-
-        // for(let i in this.rows){
-        //     this.fillSlot("row" + i, this.rows[i].getElement())
-        // }
-        // console.log("table html= ", this.getHTML())
-        // console.log("table element= ", this.element.innerHTML)
-        // this.fillSlot("headers", this.headers)
-        //
-        // for(let i in this.rows){
-        //     this.fillSlot(i, this.rows[i])
-        // }
-        //
-        // if(clickHandler)this.getElement().addEventListener("click", clickHandler)
+        this.element.addEventListener("click", (event)=> this.clickHandler(event))
     }
 
 }

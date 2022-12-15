@@ -1,4 +1,4 @@
-import {Router} from "../../framework/core/Router.mjs";
+import {route, Router} from "../../framework/core/Router.mjs";
 import {Login} from "./frontend/views/Login.mjs";
 import {Hub} from "./frontend/views/Hub.mjs";
 import {UserDetail} from "./frontend/views/UserDetail.mjs";
@@ -12,14 +12,15 @@ export const credentials = {
 }
 
 
-const viewMaps = new Map([
-    ["hub",Hub],
-    ['users', Users],
-    ["login", Login],
-    ["user", UserDetail]
-])
+const routes = [
+    route("hub", Hub),
+    route("login", Login),
+    route("users", Users),
+    route("user", UserDetail),
+]
 
-
-export const router = new Router(viewMaps)
+export const router = new Router(routes)
 const path = window.location.pathname.slice(1)
+console.log("path: " , path)
+
 router.goTo(path).then()
